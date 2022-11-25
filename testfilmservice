@@ -1,0 +1,52 @@
+from repository import clientRepository
+from repository.clientRepository import ClientRepository
+from repository.filmRepository import FilmRepository
+from service.FilmService import FilmService
+
+
+def testAdaugaService():
+    filmRepository = FilmRepository()
+    filmService = FilmService(filmRepository,ClientRepository)
+
+    filmService.adauga("1","got","joc","sf")
+
+    filme = filmService.getAllFilme()
+
+
+    try:
+        filmService.adauga("1","lotr","joc","sf")
+        assert False
+    except KeyError:
+        ...
+
+def testModificaService():
+    filmRepository = FilmRepository()
+    filmService = FilmService(filmRepository,ClientRepository)
+
+    filmService.adauga("1", "got", "joc", "sf")
+
+    filmService.modifica("1", "lotr", "joc", "sf")
+    filme = filmService.getAllFilme()
+
+    assert filme[0].gettitlu() == "lotr"
+    assert (len(filme) == 1)
+    try:
+        filmService.modifica("2","lotr","joc","sf")
+        assert False
+    except KeyError:
+        ...
+
+def testStergeService():
+    filmRepository = FilmRepository()
+    filmService = FilmService(filmRepository,ClientRepository)
+
+    filmService.adauga("1", "got", "joc", "sf")
+    filmService.stergere("1")
+    filme = filmService.getAllFilme()
+    assert (len(filme) == 0)
+    try:
+        filmService.stergere("1")
+        assert False
+    except KeyError:
+        ...
+
