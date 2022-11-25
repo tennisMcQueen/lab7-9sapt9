@@ -1,0 +1,21 @@
+from teste.testClient import testClient, testClientSetteri
+from teste.testFilm import testFilm, testFilmSetteri
+from teste.testFilmService import testAdaugaService, testModificaService
+from teste.testclientRepository import testAdaugaClientRepository, testModificaClientRepository, \
+    teststergeclientrepository
+from teste.testfilmRepository import testAdaugaFilmRepository, testModificaFilmRepository, teststergefilmrepository
+
+
+def testAll():
+    testFilm()
+    testFilmSetteri()
+    testAdaugaFilmRepository()
+    testModificaFilmRepository()
+    teststergefilmrepository()
+    testAdaugaService()
+    testModificaService()
+    testAdaugaClientRepository()
+    testModificaClientRepository()
+    teststergeclientrepository()
+    testClient()
+    testClientSetteri()
