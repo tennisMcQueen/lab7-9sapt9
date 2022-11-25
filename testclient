@@ -1,0 +1,17 @@
+from domeniu.client import Client
+
+
+def testClient():
+    film = Client("1", "avengers","film","sf")
+
+    assert film.getidClient() == "1"
+    assert film.getnume() == "avengers"
+
+def testClientSetteri():
+    film = Client("1", "avengers","film","sf")
+
+    film.setidClient("2")
+    assert film.getidClient() == "2"
+
+    film.setnume("ironman")
+    assert  film.getnume() == "ironman"
