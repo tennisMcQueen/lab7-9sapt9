@@ -1,0 +1,52 @@
+from repository import filmRepository
+from repository.clientRepository import ClientRepository
+from repository.filmRepository import FilmRepository
+from service.clientService import ClientService
+
+
+def testAdaugaCService():
+    clientRepository = ClientRepository()
+    clientService = ClientService(clientRepository,filmRepository)
+
+    clientService.adaugaClient("1","got","joc","sf")
+
+    clienti = clientService.getAllClienti()
+
+
+    try:
+        clientService.adaugaClient("1","lotr","joc","sf")
+        assert False
+    except KeyError:
+        ...
+
+def testModificaCService():
+    clientRepository = ClientRepository()
+    clientService = ClientService(clientRepository,filmRepository)
+
+    clientService.adaugaClient("1", "got", "joc", "sf")
+
+    clientService.modificaClient("1", "lotr", "joc", "sf")
+    clienti = clientService.getAllClienti()
+
+    assert clienti[0].gettitlu() == "lotr"
+    assert (len(clienti) == 1)
+    try:
+        clientService.modificaClient("2","lotr","joc","sf")
+        assert False
+    except KeyError:
+        ...
+
+def testStergeService():
+    clientRepository = ClientRepository()
+    clientService = ClientService(clientRepository,FilmRepository)
+
+    clientService.adaugaClient("1", "got", "joc", "sf")
+    clientService.stergeClient("1")
+    clienti = clientService.getAllClienti()
+    assert (len(clienti) == 0)
+    try:
+        clientService.stergeClient("1")
+        assert False
+    except KeyError:
+        ...
+
